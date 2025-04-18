@@ -90,12 +90,12 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          instance-ids: "i-0fa4c142d909dc474"
+          instance-ids: "i-07d859d190a989032"
           working-directory: /
           comment: Deploy
           command: |
             docker pull ghcr.io/${{ needs.buildImageAndPush.outputs.owner_lc }}/${{ needs.buildImageAndPush.outputs.image_name }}:latest && \
             docker stop app1 2>/dev/null || true && \
             docker rm app1 2>/dev/null || true && \
-            docker run -d --name app1 -p 8080:8080 ghcr.io/${{ needs.buildImageAndPush.outputs.owner_lc }}/${{ needs.buildImageAndPush.outputs.image_name }}:latest && \
+            docker run -d --name app1 --network common -p 8080:8080 ghcr.io/${{ needs.buildImageAndPush.outputs.owner_lc }}/${{ needs.buildImageAndPush.outputs.image_name }}:latest && \
             docker rmi $(docker images -f "dangling=true" -q) || true

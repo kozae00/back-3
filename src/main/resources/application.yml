@@ -66,7 +66,7 @@ custom:
     backUrl: "http://${custom.dev.domain}:${server.port}"
     frontUrl: "http://${custom.dev.domain}:3000"
   prod:
-    domain: app3.qwas.shop
+    domain: app3.kozae.shop
     backUrl: "https://api.${custom.prod.domain}"
     frontUrl: "https://www.${custom.prod.domain}"
   site:
